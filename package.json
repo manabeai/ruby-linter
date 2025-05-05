@@ -1,0 +1,10 @@
+{
+  "name": "ruby-web-linter",
+  "version": "0.1",
+  "type": "module",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^5.1.0",
+    "ruby-linter-rs": "file:pkg"
+  }
+}
