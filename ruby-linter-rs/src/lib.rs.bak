@@ -1,0 +1,32 @@
+use spin_sdk::http::{IntoResponse, Request, Response};
+use spin_sdk::http_component;
+use wasm_bindgen::prelude::*;
+
+/// A simple Spin HTTP component.
+#[http_component]
+fn handle_ruby_linter_rs(req: Request) -> anyhow::Result<impl IntoResponse> {
+    println!("Handling request to {:?}", req.header("spin-full-url"));
+    Ok(Response::builder()
+        .status(200)
+        .header("content-type", "text/plain")
+        .body("Hello World!")
+        .build())
+}
+
+pub fn add(left: u64, right: u64) -> u64 {
+    left + right
+}
+
+// rubyのソースコードを文字列で受取、prismでparseしてデバッグ情報出す
+#[wasm_bindgen]
+pub fn parse_ruby(source: &str) -> String {
+    let mut res = ruby_prism::parse(source.as_bytes());
+
+    let errors: ruby_prism::Diagnostics<'_> = res.errors();
+    let messages = errors.map(|e| e.message().to_string()).collect::<Vec<_>>();
+
+    if messages.is_empty() {
+        return String::from("No errors");
+    }
+    return messages[0].to_string();
+}

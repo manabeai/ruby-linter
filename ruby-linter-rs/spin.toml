@@ -1,0 +1,18 @@
+spin_manifest_version = 2
+
+[application]
+name = "ruby-linter-rs"
+version = "0.1.0"
+authors = ["manabeai <matsu.devtool@gmail.com>"]
+description = ""
+
+[[trigger.http]]
+route = "/..."
+component = "ruby-linter-rs"
+
+[component.ruby-linter-rs]
+source = "target/wasm32-wasip1/release/ruby_linter_rs.wasm"
+allowed_outbound_hosts = []
+[component.ruby-linter-rs.build]
+command = "cargo build --target wasm32-wasip1 --release"
+watch = ["src/**/*.rs", "Cargo.toml"]

@@ -4,6 +4,7 @@
   "type": "module",
   "main": "server.js",
   "dependencies": {
+    "@vue/compiler-sfc": "^3.5.17",
     "express": "^5.1.0",
     "ruby-linter-rs": "file:pkg"
   }

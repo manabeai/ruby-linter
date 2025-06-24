@@ -9,3 +9,4 @@ crate-type = ["cdylib"]
 [dependencies]
 ruby-prism = "1.4.0"
 wasm-bindgen = "0.2"
+wasmtime = "31.0.0"
